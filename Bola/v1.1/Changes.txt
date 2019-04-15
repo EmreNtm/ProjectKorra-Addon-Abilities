@@ -1,0 +1,2 @@
+-Direction control removed.
+-Delay between shots added.
