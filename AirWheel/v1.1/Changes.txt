@@ -1,0 +1,1 @@
+I added a damage disable control to the configs and I worked on the particles to decrease the lag
