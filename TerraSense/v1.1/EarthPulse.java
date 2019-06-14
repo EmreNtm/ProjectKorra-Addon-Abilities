@@ -179,7 +179,7 @@ public class EarthPulse extends EarthAbility implements AddonAbility {
 
 	@Override
 	public String getDescription() {
-		return "Enable EarhtPulse to sharpen your seismic sense! (Enables TerraSense passive.)";
+		return "Enable EarthPulse to sharpen your seismic sense! (Enables TerraSense passive.)";
 	}
 	
 	@Override
