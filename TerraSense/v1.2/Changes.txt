@@ -1,0 +1,3 @@
+Updated to PK v1.8.8 and Spigot 1.13.2
+
+Required Plugins: GlowAPI v1.4.8-SNAPSHOT and PacketListenerAPI v3.7.3-SNAPSHOT
