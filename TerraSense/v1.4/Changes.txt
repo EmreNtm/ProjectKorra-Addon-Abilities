@@ -1,0 +1,7 @@
+Added 3 more config variables and made some optimization for pulses.
+
+New config variables:
+TimeBetweenPulsesForWalk: 5 //Same as TimeBetweenPulses but for only walk function.
+TimeBetweenPulsesForSneak: 5 //Same as TimeBetweenPulses but for only sneak & blind pulses.
+PulseShapePercentage: 20 //When the pulse ranges increase, pulses will start losing their shape and there will be holes in the shape. 
+This variable between 0 - 100, prevents holes in the circle shape. 100 is lesser shape/higher lag. Percentage in the video and default is 20.
