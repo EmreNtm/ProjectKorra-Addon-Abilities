@@ -1,0 +1,7 @@
+TerraSense has a new config variable that decrease pulse frequency and lag
+
+Default:
+TimeBetweenPulses: 10
+
+10 means 10 seconds. Even if you jump, if the current server time is not dividible by 10 seconds, there will be no pulse.
+If you increase this, pulse frequency will be lower but lag will be lower aswell.
