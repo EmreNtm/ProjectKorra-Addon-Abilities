@@ -5,11 +5,9 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.Particle.DustOptions;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -30,28 +28,29 @@ import com.projectkorra.projectkorra.waterbending.Torrent;
 
 public class Mist extends WaterAbility implements AddonAbility, ComboAbility {
 
-	Block source;
-	Vector firstSourceDirection;
-	Location firstSourceLocation;
-	Location secondSourceLocation;
-	Location thirdSourceLocation;
-	Location fourthSourceLocation;
-	LinkedList<Player> affectedPlayers;
-	LinkedList<Player> blindPlayers;
-	long time1;
-	int state;
+	private Block source;
+	private Vector firstSourceDirection;
+	private Location firstSourceLocation;
+	private Location secondSourceLocation;
+	private Location thirdSourceLocation;
+	private Location fourthSourceLocation;
+	private LinkedList<Player> affectedPlayers;
+	private LinkedList<Player> blindPlayers;
+	private long time1;
+	private int state;
+	private String color;
 	
-	BendingPlayer bPlayer;
+	private BendingPlayer bPlayer;
 	
-	double radius;
-	long duration;
-	long durationStart;
-	long cooldown;
-	long chargeTime;
-	boolean blindnessOn;
-	int particlePercentage;
-	boolean mixedMist;
-	boolean blueCharge;
+	private double radius;
+	private long duration;
+	private long durationStart;
+	private long cooldown;
+	private long chargeTime;
+	private boolean blindnessOn;
+	private int particlePercentage;
+	private boolean mixedMist;
+	private boolean blueCharge;
 	
 	public Mist(Player player) {
 		super(player);
@@ -83,6 +82,7 @@ public class Mist extends WaterAbility implements AddonAbility, ComboAbility {
 		affectedPlayers = new LinkedList<Player>();
 		blindPlayers = new LinkedList<Player>();
 		
+		color = "9ECCFF";
 		state = -1;
 		firstSourceLocation = source.getLocation();
 		
@@ -124,8 +124,7 @@ public class Mist extends WaterAbility implements AddonAbility, ComboAbility {
 		if (player.isSneaking() && (state == -1 || state == 0)) {
 			state = 0;
 			if(blueCharge) {
-				DustOptions dustOptions = new DustOptions(Color.fromRGB(158, 204, 255), 1);
-				player.getWorld().spawnParticle(Particle.REDSTONE, firstSourceLocation, 1, dustOptions);
+				GeneralMethods.displayColoredParticle(firstSourceLocation, color, 0, 0, 0);
 			} else {
 				player.getWorld().spawnParticle(Particle.CLOUD, firstSourceLocation, 0);
 			}
@@ -147,8 +146,7 @@ public class Mist extends WaterAbility implements AddonAbility, ComboAbility {
 				secondSourceLocation.setX(secondSourceLocation.getX() + 2 * Math.cos(angle));
 				secondSourceLocation.setZ(secondSourceLocation.getZ() + 2 * Math.sin(angle));
 				if(blueCharge) {
-					DustOptions dustOptions = new DustOptions(Color.fromRGB(158, 204, 255), 1);
-					player.getWorld().spawnParticle(Particle.REDSTONE, secondSourceLocation, 1, dustOptions);
+					GeneralMethods.displayColoredParticle(secondSourceLocation, color, 0, 0, 0);
 				} else {
 					player.getWorld().spawnParticle(Particle.CLOUD, secondSourceLocation, 0);
 				}
@@ -165,9 +163,8 @@ public class Mist extends WaterAbility implements AddonAbility, ComboAbility {
 					fourthSourceLocation.setX(fourthSourceLocation.getX() + Math.cos(angle));
 					fourthSourceLocation.setZ(fourthSourceLocation.getZ() + Math.sin(angle));
 					if(blueCharge) {
-						DustOptions dustOptions = new DustOptions(Color.fromRGB(158, 204, 255), 1);
-						player.getWorld().spawnParticle(Particle.REDSTONE, thirdSourceLocation, 1, dustOptions);
-						player.getWorld().spawnParticle(Particle.REDSTONE, fourthSourceLocation, 1, dustOptions);
+						GeneralMethods.displayColoredParticle(thirdSourceLocation, color, 0, 0, 0);
+						GeneralMethods.displayColoredParticle(fourthSourceLocation, color, 0, 0, 0);
 					} else {
 						player.getWorld().spawnParticle(Particle.CLOUD, thirdSourceLocation, 0);
 						player.getWorld().spawnParticle(Particle.CLOUD, fourthSourceLocation, 0);
@@ -228,8 +225,7 @@ public class Mist extends WaterAbility implements AddonAbility, ComboAbility {
 					} else if (x % 3 == 0) {
 						player.getWorld().spawnParticle(Particle.CLOUD, b.getLocation(), 0);
 					} else if (x % 5 == 0) {
-						DustOptions dustOptions = new DustOptions(Color.fromRGB(158, 204, 255), 1);
-						player.getWorld().spawnParticle(Particle.REDSTONE, b.getLocation(), 1, dustOptions);
+						GeneralMethods.displayColoredParticle(b.getLocation(), color, 0, 0, 0);
 					} else if (x % 2 == 0) { 
 						player.getWorld().spawnParticle(Particle.SPELL, b.getLocation(), 1);
 					} else {
@@ -404,8 +400,8 @@ public class Mist extends WaterAbility implements AddonAbility, ComboAbility {
 		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Water.Mist.ChargeTime", 2000);
 		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Water.Mist.BlindnessOn", true);
 		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Water.Mist.ParticlePercentage", 50);
-		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Water.Mist.MixedMist", true);
-		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Water.Mist.BlueCharge", true);
+		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Water.Mist.MixedMist", false);
+		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Water.Mist.BlueCharge", false);
 		ConfigManager.defaultConfig.save();
 	}
 
