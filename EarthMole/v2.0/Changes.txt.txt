@@ -1,0 +1,12 @@
+- Code is made over from 0. Now it is more clean and most of the bugs are gone.
+
+* Stuck issue while you are going up is solved.
+* Stuck handling is improved.
+* A bug that makes you be able to walk overground is fixed.
+* If there are obsticles in your way up, you won't try to go up and the move won't go on cooldown.
+* Now you can look up and down to stop moving.
+* Going up function works fine up to 64 blocks above you.
+* While going up, you will dig 1 block wide instead of 2.
+
+Version 2.1 is for ProjectKorra v1.8.8 & Spigot 1.13.2.
+Version 2.0 is for ProjectKorra v1.8.7 & Spigot 1.12.2 / 1.11.2.
