@@ -72,7 +72,7 @@ public class Toss extends EarthAbility implements AddonAbility, ComboAbility {
 			remove();
 			return;
 		}
-		player.sendMessage( isLimited + " " + maxEntity);
+		
 		launch();
 		remove();
 	}
