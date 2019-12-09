@@ -1,0 +1,1 @@
+A bug that cause particles stay forever is fixed.
