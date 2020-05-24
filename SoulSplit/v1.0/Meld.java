@@ -27,6 +27,10 @@ public class Meld extends SpiritAbility implements AddonAbility, ComboAbility {
 			return;
 		}
 		
+		if (bPlayer.isOnCooldown(this)) {
+			return;
+		}
+		
 		setField();
 		bPlayer.addCooldown(this);
 		start();
@@ -63,7 +67,7 @@ public class Meld extends SpiritAbility implements AddonAbility, ComboAbility {
 
 	@Override
 	public String getInstructions() {
-		return "SoulSplit (Tap Sneak) -> Phase (Left Click)";
+		return "SoulSplit (Tap Sneak) -> SoulSplit (Tap Sneak) -> Phase (Left Click)";
 	}
 	
 	@Override
@@ -103,6 +107,8 @@ public class Meld extends SpiritAbility implements AddonAbility, ComboAbility {
 	@Override
 	public ArrayList<AbilityInformation> getCombination() {
 		ArrayList<AbilityInformation> combination = new ArrayList<>();
+		combination.add(new AbilityInformation("SoulSplit", ClickType.SHIFT_DOWN));
+		combination.add(new AbilityInformation("SoulSplit", ClickType.SHIFT_UP));
 		combination.add(new AbilityInformation("SoulSplit", ClickType.SHIFT_DOWN));
 		combination.add(new AbilityInformation("SoulSplit", ClickType.SHIFT_UP));
 		combination.add(new AbilityInformation("Vanish", ClickType.LEFT_CLICK));

@@ -34,6 +34,9 @@ public class SoulSplit extends SpiritAbility implements AddonAbility {
 	private long soulStartTime;
 	private long durationStartTime;
 	
+	private boolean isClicked;
+	private double soulThrowDistance;
+	
 	public SoulSplit(Player player) {
 		super(player);
     
@@ -55,6 +58,9 @@ public class SoulSplit extends SpiritAbility implements AddonAbility {
 		state = 0;
 		soulStartTime = System.currentTimeMillis();
 		durationStartTime = System.currentTimeMillis();
+		
+		isClicked = false;
+		soulThrowDistance = ConfigManager.getConfig().getDouble("ExtraAbilities.Hiro3.Spirit.SoulSplit.SoulThrowDistance");
 		
 		startingMaxHealth = player.getMaxHealth();
 		maxSoulNumber = ConfigManager.getConfig().getInt("ExtraAbilities.Hiro3.Spirit.SoulSplit.MaxSoulNumber");
@@ -150,13 +156,13 @@ public class SoulSplit extends SpiritAbility implements AddonAbility {
 					}
 				} else if (state == 2*i+1) {
 					player.getWorld().spawnParticle(Particle.CLOUD, player.getEyeLocation().add(player.getLocation().getDirection().multiply(0.4)), 0);
-					if (!player.isSneaking()) {
+					if (!player.isSneaking() || this.isClicked) {
 						double tmpHealth = player.getHealth() - (startingMaxHealth - soulHeart * (i+1));
 						if (tmpHealth < 0)
 							tmpHealth = 0;
 						else if (tmpHealth > soulHeart)
 							tmpHealth = soulHeart;
-						Soul soul = new Soul(player, player.getLocation(), soulHeart, tmpHealth);
+						Soul soul = new Soul(this, player, player.getLocation(), soulHeart, tmpHealth);
 						souls.add(soul);
 						//player.getWorld().playSound(soul.getLoc(), Sound.ENTITY_ILLUSION_ILLAGER_CAST_SPELL, 1, 10);
 						player.getWorld().playSound(soul.getLoc(), Sound.BLOCK_CHORUS_FLOWER_GROW, 1, 10);
@@ -165,6 +171,14 @@ public class SoulSplit extends SpiritAbility implements AddonAbility {
 						player.setHealthScale(startingMaxHealth - soul.getHearts() * (i+1));
 						player.setMaxHealth(startingMaxHealth - soul.getHearts() * (i+1));
 						durationStartTime = System.currentTimeMillis();
+						/* */
+						if (this.isClicked) {
+							soul.moveSoul(this.soulThrowDistance);
+							this.isClicked = false;
+							soulStartTime = System.currentTimeMillis();
+							soul.setSoulWaitTime(250);
+						}
+						/* */
 						state += 1;
 						setSoulNo(getSoulNo() + 1);
 						if (getSoulNo() == maxSoulNumber)
@@ -187,6 +201,18 @@ public class SoulSplit extends SpiritAbility implements AddonAbility {
 		return this.souls;
 	}
   
+	public boolean isClicked() {
+		return this.isClicked;
+	}
+	
+	public void setIsClicked(boolean isClicked) {
+		this.isClicked = isClicked;
+	}
+	
+	public int getState() {
+		return this.state;
+	}
+	
 	public long getCooldown() {
 		return cooldown;
 	}
@@ -207,7 +233,7 @@ public class SoulSplit extends SpiritAbility implements AddonAbility {
 
 	@Override
 	public String getInstructions() {
-		return "Hold sneak untill you see the particles.";
+		return "Hold sneak untill you see the particles. \nLeft click to throw the soul or release sneak to create the soul on where you stand.";
 	}
 	
 	public boolean isExplosiveAbility() {
@@ -259,11 +285,14 @@ public class SoulSplit extends SpiritAbility implements AddonAbility {
 		ProjectKorra.log.info("Succesfully enabled " + getName() + " by " + getAuthor());
 		
 		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Spirit.SoulSplit.Cooldown", 3000);
-		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Spirit.SoulSplit.Duration", 15000);
+		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Spirit.SoulSplit.Duration", 30000);
 		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Spirit.SoulSplit.ChargeTime", 1000);
 		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Spirit.SoulSplit.InactiveSoulTime", 2000);
 		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Spirit.SoulSplit.MaxSoulNumber", 4);
 		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Spirit.SoulSplit.SoulHeart", 4);
+		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Spirit.SoulSplit.isStackable", false);
+		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Spirit.SoulSplit.SoulThrowDistance", 5);
+		ConfigManager.getConfig().addDefault("ExtraAbilities.Hiro3.Spirit.SoulSplit.SoulThrowSpeed", 0.5);		
 		ConfigManager.defaultConfig.save();
 	}
   
