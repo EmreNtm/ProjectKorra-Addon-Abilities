@@ -67,7 +67,7 @@ public class Meld extends SpiritAbility implements AddonAbility, ComboAbility {
 
 	@Override
 	public String getInstructions() {
-		return "SoulSplit (Tap Sneak) -> SoulSplit (Tap Sneak) -> Phase (Left Click)";
+		return "SoulSplit (Tap Sneak) -> SoulSplit (Tap Sneak) -> Vanish (Left Click)";
 	}
 	
 	@Override
