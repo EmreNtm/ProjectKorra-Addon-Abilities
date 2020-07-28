@@ -4,3 +4,5 @@
 * Glow glitchs of GlowAPI no longer exist.
 * Now you can sense earthbending while you are blind.
 * New combo "SeismicWave" added.
+
+https://projectkorra.com/forum/resources/terrasense-redone.369/
