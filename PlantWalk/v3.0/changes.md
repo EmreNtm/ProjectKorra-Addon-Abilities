@@ -1,0 +1,1 @@
+* Added flySpeed config variable.
