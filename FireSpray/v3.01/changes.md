@@ -1,0 +1,1 @@
+* I forgot to open the blue fire damage on v3.0 of FireSpray. It is fixed now.
