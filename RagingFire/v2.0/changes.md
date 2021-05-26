@@ -1,4 +1,4 @@
-Flame particle movement is changed.
+* Flame particle movement is changed.
 * Added crimson spore particles.
 * Now you can only raise fire that is in your view.
 * Added "SupportFirebending" feature. 
