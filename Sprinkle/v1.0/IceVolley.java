@@ -85,12 +85,10 @@ public class IceVolley extends IceAbility implements AddonAbility {
 		this.waterSphereDuration = ConfigManager.getConfig().getLong("ExtraAbilities.Hiro3.Water.Sprinkle.IceVolley.WaterSphereDuration");
 		this.iceSphereDuration = ConfigManager.getConfig().getLong("ExtraAbilities.Hiro3.Water.Sprinkle.IceVolley.IceSphereDuration");
 		this.iceAmount = ConfigManager.getConfig().getInt("ExtraAbilities.Hiro3.Water.Sprinkle.IceVolley.IceAmount");
-		this.iceAmount = 100;
 		this.iceStartDelay = ConfigManager.getConfig().getLong("ExtraAbilities.Hiro3.Water.Sprinkle.IceVolley.IceStartDelay");
 		this.currentIceAmount = 0;
 		this.iceAmountIncrease = this.iceAmount / ((this.waterSphereDuration - this.iceStartDelay) / 50.0);
 		this.particleAmount = ConfigManager.getConfig().getInt("ExtraAbilities.Hiro3.Water.Sprinkle.IceVolley.WaterParticleAmount");
-		this.particleAmount = 50;
 		this.currentParticleAmount = 0;
 		this.particleAmountIncrease = this.particleAmount / (this.waterSphereDuration / 50.0);
 		this.iceOptions = new DustOptions(Color.fromRGB(193, 241, 255), 0.5f);
