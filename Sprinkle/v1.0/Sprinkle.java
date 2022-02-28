@@ -69,10 +69,8 @@ public class Sprinkle extends WaterAbility implements AddonAbility, ComboAbility
 		double searchRange = ConfigManager.getConfig().getDouble("ExtraAbilities.Hiro3.Water.Sprinkle.SearchRange");
 		this.searchRangeSquared = searchRange * searchRange;
 		this.sprinkleDuration = ConfigManager.getConfig().getLong("ExtraAbilities.Hiro3.Water.Sprinkle.Duration");
-		this.sprinkleDuration = 4000;
 		this.sprinkleStartDelay = 250;
 		this.sprinkleRadius = ConfigManager.getConfig().getDouble("ExtraAbilities.Hiro3.Water.Sprinkle.Radius");
-		this.sprinkleRadius = 15;
 		this.sprinkleRadiusSquared = this.sprinkleRadius * this.sprinkleRadius;
 		this.currentSprinkleRadius = 1;
 		this.sprinkleRadiusIncreseAmount = (this.sprinkleRadius - 1) / (this.sprinkleDuration / 50.0);
